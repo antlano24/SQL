@@ -1,0 +1,30 @@
+--Create a grocery store database
+
+CREATE TABLE drinks (ID INTEGER PRIMARY KEY, BRAND TEXT, FLAVOR TEXT, AISLE INTEGER, PRICE INTEGER);
+
+INSERT INTO drinks VALUES
+(1, "Pepsi", "Cola", 7, 9),
+(2, "A&W", "Root Beer", 4, 8),
+(3, "Seven Up", "Lemon Lime", 3, 6), 
+(4, "Dr. Pepper", "Spiced Cherry", 7, 10),
+(5, "Dr.Thunder", "Spiced Cherry", 12, 7),
+(6, "Big Red", "Cream Soda", 5, 5),
+(7, "RC", "Cola", 6, 8),
+(8, "Mountain Dew", "Citrus", 9, 10),
+(9, "Fanta Grape", "Grape", 10, 11),
+(10, "Diet Coke", "Diet Cola", 1, 10),
+(11, "Sunkist", "Orange", 2, 6),
+(12, "Vernors", "Ginger Ale", 3, 10),
+(13, "Cherry Pepsi", "Cherry Cola", 7, 7),
+(14, "Monster", "Energy", 5, 9),
+(15, "Aquafina", "Water", 1, 8)
+;
+
+--Display Database ordered by aisle.
+SELECT * From drinks ORDER BY AISLE;
+
+--What drinks are less than $9 ordered by aisle? 
+SELECT * FROM drinks WHERE PRICE <9 ORDER BY AISLE;
+
+--What is the SUM if all drinks were sold just once?
+SELECT SUM(PRICE) FROM drinks;
