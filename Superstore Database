@@ -29,23 +29,30 @@ VALUES
 
 #For this project, I used SQL to query the Superstore database to get information about items sold at the store, their prices, and quantity.  
 
-#Use a SELECT statement to order items by price.
+#Use a SELECT statement to order items by price from large to small. 
 SELECT item_name, price
 FROM superstore
 ORDER BY price desc;
 
-#Show a statistic about the item prices.
-SELECT AVG(price)
-FROM superstore;
-
-#Show a statistic about item prices in the category of 'Kitchen Supplies'. 
-SELECT MIN(price), category
+#Show the most expensive and least expensive items sold in the superstore. 
+SELECT item_name, price
 FROM superstore
-WHERE category='Kitchen Supplies';
+WHERE price = (SELECT MAX(price) FROM superstore)
+OR price = (SELECT MIN(price) FROM superstore)
+;
+
+
+#Show the average price of items sold in the superstore in the category 'Kitchen Supplies'. 
+SELECT ROUND (AVG(price), 2) AS AVG_Kitchen_Supply_Price
+FROM superstore
+WHERE category = 'Kitchen Supplies'
+;
+
 
 #Show the quantity where item name is 'Smart LED TV'. 
 SELECT item_name, stock_quantity
 FROM superstore
-WHERE item_name='Smart LED TV';
+WHERE item_name='Smart LED TV'
+;
 
 
