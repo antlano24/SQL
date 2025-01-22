@@ -1,4 +1,6 @@
---How many many unique orders were placed in January? In other words, how many distinct order ids do we have?
+#In this SQL, I'm querying data from a database with multiple tables to get stats on customers and their orders.
+
+#1 How many unique orders were placed in January? 
 
 SELECT COUNT (DISTINCT orderID)
 FROM BIT_DB.JanSales
@@ -7,8 +9,7 @@ AND orderID <> 'Order ID'
 ;
 
 
---How many of those orders were iPhones? 
-
+#2 How many of those orders were iPhones? 
 
 SELECT COUNT (DISTINCT orderID)
 FROM BIT_DB.JanSales
@@ -17,9 +18,9 @@ AND length (orderID) = 6
 AND orderID <> 'Order ID'
 ;
 
---Select the customer account numbers for all the orders that were placed in February.
+#3 Select the customer account numbers for all the orders that were placed in February.
 
-SELECT COUNT (DISTINCT acctnum)
+SELECT DISTINCT acctnum
 FROM customers cust
 JOIN FebSales feb
 ON cust.order_ID = feb.orderID
@@ -29,7 +30,7 @@ AND orderid <> 'Order ID';
 
 
 
---Which product was the cheapest one sold in January, and what was the price?
+#4 Which product was the cheapest one sold in January, and what was the price?
 
 SELECT product, price
 FROM BIT_DB.JanSales
@@ -38,17 +39,17 @@ LIMIT 1
 ;
 
 
---What is the total revenue for each product sold in January?
+#5 What is the total revenue for each product sold in January?
 
-SELECT sum(quantity)*price as revenue
-,product
+SELECT sum(quantity)*price as revenue,
+product
 FROM BIT_DB.JanSales
 WHERE product <> 'Product'
 GROUP BY product
 HAVING Sum(quantity)*price <> 0
 ;
 
---Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+#6 Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 SELECT product,
 SUM(quantity),
 SUM(quantity)*price AS revenue
@@ -58,7 +59,7 @@ GROUP BY product
 ;
 
 
---How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+#7 How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
 
 SELECT COUNT(DISTINCT cust.acctnum),
 ROUND(AVG(feb.quantity*feb.price), 2) AS rounded_avg_spent
